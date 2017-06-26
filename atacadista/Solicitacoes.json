@@ -1,0 +1,139 @@
+{
+  "solicitacoes": [
+    {
+      "solicitacao": {
+        "codSolicitacao": 1,
+        "cliente": 1,
+        "estado": "Solicitado",
+        "itensSolicitacao": [
+          {
+            "item": {
+              "codItem": 1,
+              "produto": {
+                "cod": 1,
+                "desc": "produto1",
+                "preco": 2
+              },
+              "qtd": 15,
+              "obs": "Observacao item 1"
+            }
+          },
+          {
+            "item": {
+              "codItem": 2,
+              "produto": {
+                "cod": 5,
+                "desc": "produto5",
+                "preco": 1
+              },
+              "qtd": 30,
+              "obs": "Observacao item 5"
+            }
+          },
+          {
+            "item": {
+              "codItem": 3,
+              "produto": {
+                "cod": 2,
+                "desc": "produto1",
+                "preco": 0.3
+              },
+              "qtd": 10,
+              "obs": "Observacao item 2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "solicitacao": {
+        "codSolicitacao": 2,
+        "cliente": 3,
+        "estado": "Em Fabricacao",
+        "itensSolicitacao": [
+          {
+            "item": {
+              "codItem": 1,
+              "produto": {
+                "cod": 1,
+                "desc": "produto1",
+                "preco": 2
+              },
+              "qtd": 50,
+              "obs": "Observacao item 1"
+            }
+          },
+          {
+            "item": {
+              "codItem": 2,
+              "produto": {
+                "cod": 5,
+                "desc": "produto5",
+                "preco": 1
+              },
+              "qtd": 70,
+              "obs": "Observacao item 5"
+            }
+          },
+          {
+            "item": {
+              "codItem": 3,
+              "produto": {
+                "cod": 2,
+                "desc": "produto1",
+                "preco": 0.3
+              },
+              "qtd": 100,
+              "obs": "Observacao item 2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "solicitacao": {
+        "codSolicitacao": 3,
+        "cliente": 2,
+        "estado": "Finalizado",
+        "itensSolicitacao": [
+          {
+            "item": {
+              "codItem": 1,
+              "produto": {
+                "cod": 3,
+                "desc": "produto3",
+                "preco": 5
+              },
+              "qtd": 20,
+              "obs": "Observacao item 3"
+            }
+          },
+          {
+            "item": {
+              "codItem": 2,
+              "produto": {
+                "cod": 6,
+                "desc": "produto6",
+                "preco": 7
+              },
+              "qtd": 10,
+              "obs": "Observacao item 6"
+            }
+          },
+          {
+            "item": {
+              "codItem": 3,
+              "produto": {
+                "cod": 10,
+                "desc": "produto10",
+                "preco": 15.3
+              },
+              "qtd": 15,
+              "obs": "Observacao item 10"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

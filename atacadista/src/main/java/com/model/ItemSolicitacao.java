@@ -1,0 +1,68 @@
+package com.model;
+
+public class ItemSolicitacao {
+	private Produto prod;
+	private int cod, qtd;
+	private String obs;
+	
+	public int getCod() {
+		return cod;
+	}
+	public void setCod(int cod) {
+		if(cod < 1) {
+			throw new IllegalArgumentException("Nao e permitido atribuir o "
+					+ "valor menor que 0 ao codigo do Item de Solicitacao.");
+		}
+		else {
+			this.cod = cod;
+		}
+	}
+	public ItemSolicitacao(Produto prod, int qtd, String obs) {
+		if(prod == null) {
+			throw new IllegalArgumentException("Nao e permitido atribuir o valor NULL ao Produto do Item de Estoque.");
+		}
+		else {
+			if(qtd < 0) {
+				throw new IllegalArgumentException("Nao e permitido atribuir o "
+						+ "valor menor que 0 a quantidade do Produto do Item de Estoque.");
+			}
+			else {
+				this.prod = prod;
+				this.qtd = qtd;
+				this.obs = obs;
+			}
+		}
+		
+			
+	}
+	public Produto getProd() {
+		return prod;
+	}
+	public void setProd(Produto prod) {
+		if(prod == null) {
+			throw new IllegalArgumentException("Nao e permitido atribuir o valor NULL ao Produto do Item de Estoque.");
+		}
+		else {
+			this.prod = prod;
+		}
+	}
+	public int getQtd() {
+		return qtd;
+	}
+	public void setQtd(int qtd) {
+		if(qtd < 1) {
+			throw new IllegalArgumentException("Nao e permitido atribuir o "
+					+ "valor menor que 0 a quantidade do Produto do Item de Estoque.");
+		}
+		else {
+			this.qtd = qtd;
+		}
+	}
+	public String getObs() {
+		return obs;
+	}
+	public void setObs(String obs) {
+		this.obs = obs;
+	}
+
+}

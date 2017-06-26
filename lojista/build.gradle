@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'ASDof07-ABE-Final-Lojista'
+    version =  '0.1.0'
+}
+
+springBoot {
+	executable = true
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+	compile "io.springfox:springfox-swagger2:2.6.1"
+    compile("org.springframework.boot:spring-boot-starter-hateoas")
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1'
+	compile group: 'org.json', name: 'json', version: '20090211'
+    testCompile("com.jayway.jsonpath:json-path")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}

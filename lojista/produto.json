@@ -1,0 +1,24 @@
+{
+  "produtos": [
+      {
+        "cod": 1,
+        "desc": "produto1",
+        "preco": 1.00
+      },
+      {
+        "cod": 2,
+        "desc": "produto2",
+        "preco": 0.50
+      },
+      {
+        "cod": 3,
+        "desc": "produto3",
+        "preco": 10.00
+      },
+      {
+        "cod": 4,
+        "desc": "produto4",
+        "preco": 2.00
+      }
+    ]
+}

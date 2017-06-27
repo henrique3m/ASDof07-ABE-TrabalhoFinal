@@ -5,6 +5,7 @@
         "codSolicitacao": 1,
         "cliente": 1,
         "estado": "Solicitado",
+        "callback": "",
         "itensSolicitacao": [
           {
             "item": {
@@ -50,6 +51,7 @@
         "codSolicitacao": 2,
         "cliente": 3,
         "estado": "Em Fabricacao",
+        "callback": "",
         "itensSolicitacao": [
           {
             "item": {
@@ -95,6 +97,7 @@
         "codSolicitacao": 3,
         "cliente": 2,
         "estado": "Finalizado",
+        "callback": "",
         "itensSolicitacao": [
           {
             "item": {

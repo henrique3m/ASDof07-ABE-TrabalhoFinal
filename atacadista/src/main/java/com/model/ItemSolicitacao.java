@@ -5,6 +5,32 @@ public class ItemSolicitacao {
 	private int cod, qtd;
 	private String obs;
 	
+	
+	public ItemSolicitacao(int cod, Produto prod, int qtd, String obs) {
+		if(cod < 1) {
+			throw new IllegalArgumentException("Nao e permitido atribuir o "
+					+ "valor menor que 1 ao codigo do Item de Solicitacao.");
+		}
+		else {
+			if(prod == null) {
+			throw new IllegalArgumentException("Nao e permitido atribuir o valor NULL ao Produto do Item de Estoque.");
+			}
+			else {
+				if(qtd < 0) {
+					throw new IllegalArgumentException("Nao e permitido atribuir o "
+							+ "valor menor que 0 a quantidade do Produto do Item de Estoque.");
+				}
+				else {
+					this.cod = cod;
+					this.prod = prod;
+					this.qtd = qtd;
+					this.obs = obs;
+				}
+			}
+		}
+			
+	}
+	
 	public int getCod() {
 		return cod;
 	}
@@ -16,24 +42,6 @@ public class ItemSolicitacao {
 		else {
 			this.cod = cod;
 		}
-	}
-	public ItemSolicitacao(Produto prod, int qtd, String obs) {
-		if(prod == null) {
-			throw new IllegalArgumentException("Nao e permitido atribuir o valor NULL ao Produto do Item de Estoque.");
-		}
-		else {
-			if(qtd < 0) {
-				throw new IllegalArgumentException("Nao e permitido atribuir o "
-						+ "valor menor que 0 a quantidade do Produto do Item de Estoque.");
-			}
-			else {
-				this.prod = prod;
-				this.qtd = qtd;
-				this.obs = obs;
-			}
-		}
-		
-			
 	}
 	public Produto getProd() {
 		return prod;

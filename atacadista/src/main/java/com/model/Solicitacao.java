@@ -11,10 +11,10 @@ public class Solicitacao extends ResourceSupport {
 	
 	private  List<ItemSolicitacao> Itens = new ArrayList();
 	private int codClinte;
-	private String state;
+	private String state, callback;
 
 	
-	public Solicitacao(int cod, int codClinte, String state) {
+	public Solicitacao(int cod, int codClinte, String state, String callback) {
 		if(cod < 1) {
 			throw new IllegalArgumentException("Nao e permitido atribuir o valor menor que 1 ao codigo do Estoque.");
 		}
@@ -26,6 +26,7 @@ public class Solicitacao extends ResourceSupport {
 				this.cod = cod;
 				this.codClinte = codClinte;
 				this.state = state;
+				this.callback = callback;
 //				String a = State.valueOf(state.toUpperCase().replaceAll(" ", "_"));
 //				 switch (a){
 //				 case SOLICITADO:
@@ -107,6 +108,16 @@ public class Solicitacao extends ResourceSupport {
 //		 default:
 //			 throw new IllegalArgumentException("Valor invalido para estado da Solicitacao.");
 //		 }
+	}
+
+
+	public String getCallback() {
+		return callback;
+	}
+
+
+	public void setCallback(String callback) {
+		this.callback = callback;
 	}
 
 }

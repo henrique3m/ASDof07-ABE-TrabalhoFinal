@@ -1,0 +1,39 @@
+{
+  "produtos": [
+    {
+      "cod": 1,
+      "desc": "produto1",
+      "preco": 0.5
+    },
+    {
+      "cod": 2,
+      "desc": "produto2",
+      "preco": 0.3
+    },
+    {
+      "cod": 3,
+      "desc": "produto3",
+      "preco": 5
+    },
+    {
+      "cod": 4,
+      "desc": "produto4",
+      "preco": 1
+    },
+    {
+      "cod": 5,
+      "desc": "produto5",
+      "preco": 1
+    },
+    {
+      "cod": 6,
+      "desc": "produto6",
+      "preco": 7
+    },
+    {
+      "cod": 10,
+      "desc": "produto10",
+      "preco": 15.3
+    }
+  ]
+}

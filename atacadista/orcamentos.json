@@ -1,0 +1,54 @@
+{
+  "orcamentos": [
+    {
+      "orcamento": {
+        "codorcamento": 1,
+        "cliente": 1,
+        "valorTotal": 40.5,
+        "data": "28/06/2017",
+        "callback": "",
+        "itens": [
+          {
+            "item": {
+              "codItem": 1,
+              "produto": {
+                "cod": 1,
+                "desc": "produto1",
+                "preco": 0.5
+              },
+              "qtd": 15,
+              "obs": "Observacao item 1",
+              "valoritem": 7.5
+            }
+          },
+          {
+            "item": {
+              "codItem": 2,
+              "produto": {
+                "cod": 5,
+                "desc": "produto5",
+                "preco": 1
+              },
+              "qtd": 30,
+              "obs": "Observacao item 5",
+              "valoritem": 30
+            }
+          },
+          {
+            "item": {
+              "codItem": 3,
+              "produto": {
+                "cod": 2,
+                "desc": "produto2",
+                "preco": 0.3
+              },
+              "qtd": 10,
+              "obs": "Observacao item 2",
+              "valoritem": 3
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

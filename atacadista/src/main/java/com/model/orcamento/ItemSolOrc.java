@@ -1,7 +1,8 @@
 package com.model.orcamento;
 
 public class ItemSolOrc {
-	int prod, qtd;
+	private int prod, qtd;
+	private String obs;
 
 	public int getProd() {
 		return prod;
@@ -17,5 +18,13 @@ public class ItemSolOrc {
 
 	public void setQtd(int qtd) {
 		this.qtd = qtd;
+	}
+
+	public String getObs() {
+		return obs;
+	}
+
+	public void setObs(String obs) {
+		this.obs = obs;
 	}
 }

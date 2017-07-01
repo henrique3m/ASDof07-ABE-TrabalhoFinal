@@ -4,14 +4,10 @@ package com.control;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.model.Estoque;
 import com.model.ItemEstoque;
-import com.model.Produto;
+
 
 import io.swagger.annotations.ApiOperation;
 

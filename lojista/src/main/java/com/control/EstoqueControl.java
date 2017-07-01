@@ -30,59 +30,12 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/estoque")
 public class EstoqueControl {
 	
-	private static Estoque estoque = GetEstoque();
 	
 	
-	
-	private static Estoque GetEstoque(){
-		Estoque estoque = new Estoque(1);
-		JSONObject jsonObject;
-		
-		try {
-			//obtem informacoes armazenadas no arquivo.json
-			
-			FileInputStream fileInputStream = new FileInputStream("estoque.json");
-			StringBuffer stringBuffer = new StringBuffer("");
-			String json = "";
-		    int x;
-		    while((x = fileInputStream.read())!=-1)
-		    {
-		        stringBuffer.append((char)x);
-		    }
-		    json = stringBuffer.toString();
-
-			jsonObject = new JSONObject(json);
-			JSONObject est = jsonObject.getJSONObject("estoque");
-			JSONArray itensEstoque = est.getJSONArray("itensEstoque");
-			
-			
-			for (int i=0; i < itensEstoque.length(); i++) {
-				 
-				JSONObject it = itensEstoque.getJSONObject(i);
-				JSONObject pro = it.getJSONObject("produto");
-				ItemEstoque item =  new ItemEstoque(
-						new Produto(pro.getInt("cod"), pro.getString("desc"), pro.getDouble("preco")), 
-						it.getInt("qtd"));
-				estoque.addItem(item);
-				
-			}
-		} 
-		//Trata as exceptions que podem ser lancadas no decorrer do processo
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return estoque;
-	}
-
 	@ApiOperation(value = "Consulta de produtos no estoque.")
 	@RequestMapping(method = RequestMethod.GET, value ="/getItens")
     public ResponseEntity<List<ItemEstoque>> GetItens() {
-		List<ItemEstoque> itens = Estoque.getItens();
+		List<ItemEstoque> itens = Estoque.GetEstoque().getItens();
 		for(ItemEstoque i : itens) {
 			if(!i.getProd().hasLinks()){
 				i.getProd().add(linkTo(methodOn(ProdutoControl.class).GetProduto(i.getProd().getCod())).withSelfRel());

@@ -14,6 +14,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -95,12 +96,47 @@ public class OrcamentoControl {
 	/********************************************************/
 	/******************solicitaOrcamento*********************/
 	/********************************************************/
+	/********************************************************/
 	
 	
 	
 	@ApiOperation(value = "Inclui nova solicitacao de orcamento")
 	@RequestMapping(method = RequestMethod.POST, value ="/solicitaorcamento")
-    public ResponseEntity<Orcamento> solicitaOrcamento(@RequestBody SolicitacaoOrcamento sO) throws JSONException {
+    public ResponseEntity<Orcamento> SolicitaOrcamento(@RequestBody SolicitacaoOrcamento sO) throws JSONException {
+		int codItem = 1;
+		
+		//Pega a data corrente.
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		String hoje = sdf.format(cal.getTime());
+		
+		Orcamento orc = new Orcamento(Orcamento.getNewId(), sO.getCliente(), hoje, sO.getCallback());
+		for(ItemSolOrc i : sO.getItens()) {
+			Produto p = Produto.ById(i.getProd());
+			double valor = p.getPreco() * i.getQtd();
+			orc.addItem(new ItemSolicitacao(codItem, p, 
+					i.getQtd(), valor, i.getObs()));
+			
+			codItem +=1;
+		}
+		orc.save();
+		if (!orc.hasLink(Link.REL_LAST)) {
+			orc.add(linkTo(methodOn(OrcamentoControl.class).ReprovaOrcamento(orc.getCodorcamento())).withRel(Link.REL_LAST));
+			
+		}
+        return new ResponseEntity<Orcamento>(orc, HttpStatus.OK);
+    }
+	
+	
+	/********************************************************/
+	/********************************************************/
+	/******************AprovaOrcamento*********************/
+	/********************************************************/
+	/********************************************************/
+	
+	/*@ApiOperation(value = "Aprova orcamento enviado ao Lojista")
+	@RequestMapping(method = RequestMethod.POST, value ="/{id}/aprovar")
+    public ResponseEntity<Orcamento> AprovaOrcamento(@PathVariable("id") int cod) throws JSONException {
 		int codItem = 1;
 		
 		//Pega a data corrente.
@@ -119,7 +155,27 @@ public class OrcamentoControl {
 		}
 		orc.save();
         return new ResponseEntity<Orcamento>(orc, HttpStatus.OK);
+    }*/
+	
+	
+	
+	/********************************************************/
+	/********************************************************/
+	/******************ReprovaOrcamento*********************/
+	/********************************************************/
+	/********************************************************/
+	
+	
+	@ApiOperation(value = "Reprova orcamento enviado ao Lojista")
+	@RequestMapping(method = RequestMethod.DELETE, value ="/{id}/reprovar")
+    public ResponseEntity<String> ReprovaOrcamento(@PathVariable("id") int cod) throws JSONException {
+		Orcamento.Cancela(cod);
+        return new ResponseEntity<String>("O Orcamento foi reprovado e o pedido cancelado.", HttpStatus.OK);
     }
+	
+	
+	
+	
 	
 	
 	

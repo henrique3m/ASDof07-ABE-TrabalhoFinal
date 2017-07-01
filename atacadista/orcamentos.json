@@ -1,1 +1,1 @@
-{"orcamentos":[{"cliente":1,"itens":[{"qtd":15,"obs":"observacao","prod":{"preco":0.5,"cod":1,"links":[],"desc":"produto1"},"valorItem":7.5,"cod":1},{"qtd":30,"obs":"observacao2","prod":{"preco":0.3,"cod":2,"links":[],"desc":"produto2"},"valorItem":9,"cod":2},{"qtd":10,"obs":"observacao2","prod":{"preco":5,"cod":3,"links":[],"desc":"produto3"},"valorItem":50,"cod":3}],"data":"29-06-2017","codorcamento":1,"valorTotal":66.5,"callback":"http:\/\/localhost","links":[]}]}
+{"orcamentos":[]}

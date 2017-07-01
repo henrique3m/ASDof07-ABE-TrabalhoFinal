@@ -251,5 +251,42 @@ public class Orcamento extends ResourceSupport{
         
 	}
 	
+	public static void SaveAll(List<Orcamento> orcamentos) throws JSONException{
+		Gson g = new Gson();
+		String sOrcs = g.toJson(orcamentos);
+		JSONArray orcs = new JSONArray(sOrcs);
+		JSONObject jOrcs = new JSONObject();
+		try {
+			jOrcs.put("orcamentos", orcs);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+        try {
+        	FileWriter file = new FileWriter("orcamentos.json");
+			file.write(jOrcs.toString());
+			file.flush();
+	        file.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+		
+	}
+	
+	public static void Cancela(int cod) throws JSONException {
+		List<Orcamento> orcamentos = GetOrcamentos();
+		for(Orcamento o : orcamentos){
+			if(o.getCodorcamento() == cod) {
+				orcamentos.remove(o);
+				break;
+			}
+			
+		}
+		SaveAll(orcamentos);
+	}
+	
 	
 }

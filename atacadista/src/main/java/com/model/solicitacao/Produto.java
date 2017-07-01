@@ -70,7 +70,7 @@ public class Produto extends ResourceSupport {
 	} 
 	
 	
-	public static List<Produto> getProdutos(){
+	public static List<Produto> GetProdutos(){
 		JSONObject jsonObject;
 		List<Produto> produtos = new ArrayList<Produto>();
 		
@@ -114,11 +114,10 @@ public class Produto extends ResourceSupport {
 	
 	
 	
-	
 	public static Produto ById(int cod) {
 
 		Produto prod = null;
-		for(Produto p : getProdutos()){
+		for(Produto p : GetProdutos()){
 			if (p.getCod() == cod){
 				prod = p;
 			}

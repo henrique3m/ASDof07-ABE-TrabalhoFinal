@@ -1,15 +1,25 @@
 package com.model.solicitacao;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.hateoas.ResourceSupport;
+
+import com.google.gson.Gson;
+import com.model.orcamento.Orcamento;
 
 public class Solicitacao extends ResourceSupport {
 	
 	private int cod;
 	
-	private  List<ItemSolicitacao> Itens = new ArrayList();
+	private  List<ItemSolicitacao> itens = new ArrayList<ItemSolicitacao>();
 	private int codClinte;
 	private String state, callback;
 	private double valorTotal;
@@ -29,24 +39,27 @@ public class Solicitacao extends ResourceSupport {
 				this.state = state;
 				this.callback = callback;
 				this.valorTotal = valorTotal;
-//				String a = State.valueOf(state.toUpperCase().replaceAll(" ", "_"));
-//				 switch (a){
-//				 case SOLICITADO:
-//					 this.state = State.SOLICITADO;
-//				 case EM_FABRICACAO:
-//					 this.state = State.EM_FABRICACAO;
-//				 case FINALIZADO:
-//					 this.state = State.FINALIZADO;
-//				 case DESPACHADO:
-//					 this.state = State.DESPACHADO;
-//				 case CANCELADO:
-//					 this.state = State.CANCELADO;
-//				 default:
-//					 throw new IllegalArgumentException("Valor invalido para estado da Solicitacao.");
-//				 }
 
 			}
 		}
+	}
+	
+
+	public Solicitacao(Orcamento o){
+		if (o == null) {
+			throw new IllegalArgumentException("Orcamento esta vazio.");
+		}
+		else{
+			this.cod = getNewId();
+			this.codClinte = o.getCliente();
+			this.state = "Solicitado";
+			this.callback = o.getCallback();
+			this.valorTotal = o.getValorTotal();
+			this.itens = o.getItens();
+			
+			this.save();
+		}
+		
 	}
 
 
@@ -64,7 +77,7 @@ public class Solicitacao extends ResourceSupport {
 	}
 
 	public List<ItemSolicitacao> getItens() {
-		return Itens;
+		return itens;
 	}
 
 	public void addItem(ItemSolicitacao item) {
@@ -72,7 +85,7 @@ public class Solicitacao extends ResourceSupport {
 			throw new IllegalArgumentException("Nao e permitido atribuir um Item de Estoque vazio ao Estoque.");
 		}
 		else {
-			Itens.add(item);
+			itens.add(item);
 		}
 	}
 
@@ -95,21 +108,6 @@ public class Solicitacao extends ResourceSupport {
 
 	public void setState(String state) {
 		this.state = state;
-//		State a = State.valueOf(state.toUpperCase());
-//		 switch (a){
-//		 case SOLICITADO:
-//			 this.state = State.SOLICITADO;
-//		 case EM_FABRICACAO:
-//			 this.state = State.EM_FABRICACAO;
-//		 case FINALIZADO:
-//			 this.state = State.FINALIZADO;
-//		 case DESPACHADO:
-//			 this.state = State.DESPACHADO;
-//		 case CANCELADO:
-//			 this.state = State.CANCELADO;
-//		 default:
-//			 throw new IllegalArgumentException("Valor invalido para estado da Solicitacao.");
-//		 }
 	}
 
 
@@ -132,4 +130,125 @@ public class Solicitacao extends ResourceSupport {
 		this.callback = callback;
 	}
 
+
+	
+	
+	
+	
+	public static List<Solicitacao> GetSolicitacoes(){
+		List<Solicitacao> solicitacoes = new ArrayList<Solicitacao>();
+		JSONObject jsonObject;
+		
+		try {
+			//obtem informacoes armazenadas no arquivo.json
+			
+			@SuppressWarnings("resource")
+			FileInputStream fileInputStream = new FileInputStream("Solicitacoes.json");
+			StringBuffer stringBuffer = new StringBuffer("");
+			String json = "";
+		    int x;
+		    while((x = fileInputStream.read())!=-1)
+		    {
+		        stringBuffer.append((char)x);
+		    }
+		    json = stringBuffer.toString();
+		    if (json.length() > 0) {
+				jsonObject = new JSONObject(json);
+				JSONArray jSols = jsonObject.getJSONArray("solicitacoes");
+				
+				for (int i=0; i < jSols.length(); i++) {
+					JSONObject jSol = jSols.getJSONObject(i);
+					System.out.println(jSol);
+					
+					Solicitacao sol = new Solicitacao(
+							jSol.getInt("cod"), jSol.getInt("codClinte"), jSol.getString("state"), 
+							jSol.getDouble("valorTotal"), jSol.getString("callback"));
+					JSONArray jItensSol =  jSol.getJSONArray("itens");
+					for (int y=0; y < jItensSol.length(); y++) {
+						JSONObject jItem = jItensSol.getJSONObject(y);
+						System.out.println(jItem);
+						JSONObject jProd = jItem.getJSONObject("prod");
+						ItemSolicitacao item = new ItemSolicitacao(jItem.getInt("cod"),
+								new Produto(jProd.getInt("cod"), jProd.getString("desc"), jProd.getDouble("preco")), 
+								jItem.getInt("qtd"), jItem.getDouble("valorItem"), jItem.getString("obs"));
+						sol.addItem(item);
+					}
+					
+					solicitacoes.add(sol);
+				}
+		    }
+		} 
+		//Trata as exceptions que podem ser lancadas no decorrer do processo
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return solicitacoes;
+	}
+	
+	
+	public static int getNewId(){
+		int last=0;
+		for(Solicitacao s : GetSolicitacoes()) {
+			if (last < s.getCod()){
+				last = s.getCod();
+			}
+		}
+		return last +1;
+	}
+		
+	public void save(){
+		List<Solicitacao> solicitacoes = GetSolicitacoes();
+		solicitacoes.add(this);
+		SaveAll(solicitacoes);
+        
+	}
+	
+	public static void SaveAll(List<Solicitacao> solicitacoes) {
+		Gson g = new Gson();
+		String sSols = g.toJson(solicitacoes);
+		JSONArray sols = null;
+		try {
+			sols = new JSONArray(sSols);
+		} catch (JSONException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		JSONObject jSols = new JSONObject();
+		try {
+			jSols.put("solicitacoes", sols);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+        try {
+        	FileWriter file = new FileWriter("Solicitacoes.json");
+			file.write(jSols.toString());
+			file.flush();
+	        file.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+		
+	}
+	
+	public static void Cancela(int cod) {
+		List<Solicitacao> solicitacoes = GetSolicitacoes();
+		int i = 0;
+		for(Solicitacao s : solicitacoes){
+			if(s.getCod() == cod) {
+				solicitacoes.remove(i);
+				break;
+			}
+			i +=1;
+		}
+		SaveAll(solicitacoes);
+	}
 }

@@ -13,7 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.hateoas.ResourceSupport;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.google.gson.Gson;
 import com.model.solicitacao.ItemSolicitacao;
 import com.model.solicitacao.Produto;
@@ -225,42 +225,24 @@ public class Orcamento extends ResourceSupport{
 		return orc;
 	}
 	
-	public void save() throws JSONException{
+	public void save(){
 		List<Orcamento> orcamentos = GetOrcamentos();
 		orcamentos.add(this);
-		Gson g = new Gson();
-		String sOrcs = g.toJson(orcamentos);
-		JSONArray orcs = new JSONArray(sOrcs);
-		JSONObject jOrcs = new JSONObject();
-		try {
-			jOrcs.put("orcamentos", orcs);
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-        try {
-        	FileWriter file = new FileWriter("orcamentos.json");
-			file.write(jOrcs.toString());
-			file.flush();
-	        file.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		SaveAll(orcamentos);
         
 	}
 	
-	public static void SaveAll(List<Orcamento> orcamentos) throws JSONException{
+	public static void SaveAll(List<Orcamento> orcamentos){
 		Gson g = new Gson();
 		String sOrcs = g.toJson(orcamentos);
-		JSONArray orcs = new JSONArray(sOrcs);
+		JSONArray orcs ;
 		JSONObject jOrcs = new JSONObject();
 		try {
+			orcs = new JSONArray(sOrcs);
 			jOrcs.put("orcamentos", orcs);
-		} catch (JSONException e1) {
+		} catch (JSONException e2) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e2.printStackTrace();
 		}
 		
         try {
@@ -276,14 +258,15 @@ public class Orcamento extends ResourceSupport{
 		
 	}
 	
-	public static void Cancela(int cod) throws JSONException {
+	public static void Cancela(int cod) {
 		List<Orcamento> orcamentos = GetOrcamentos();
+		int i = 0;
 		for(Orcamento o : orcamentos){
-			if(o.getCodorcamento() == cod) {
-				orcamentos.remove(o);
+			if(o.codorcamento == cod) {
+				orcamentos.remove(i);
 				break;
 			}
-			
+			i +=1;
 		}
 		SaveAll(orcamentos);
 	}

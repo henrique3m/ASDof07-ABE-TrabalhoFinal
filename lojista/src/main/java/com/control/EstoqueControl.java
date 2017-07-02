@@ -28,7 +28,7 @@ public class EstoqueControl {
 	
 	
 	
-	@ApiOperation(value = "Consulta de produtos no estoque.")
+	@ApiOperation(value = "Consulta de produtos no estoque.",tags={ "Estoque", })
 	@RequestMapping(method = RequestMethod.GET, value ="/getItens")
     public ResponseEntity<List<ItemEstoque>> GetItens() {
 		List<ItemEstoque> itens = Estoque.GetEstoque().getItens();

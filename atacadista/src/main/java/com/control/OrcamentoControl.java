@@ -41,7 +41,8 @@ public class OrcamentoControl {
 	/*******************************************/
 	
 	
-	@ApiOperation(value = "Consulta de todas os orcamentos.")
+	@ApiOperation(value = "Consulta todos os orçamentos.",tags={ "Orçamento", })
+
 	@RequestMapping(method = RequestMethod.GET, value ="/getall")
     public ResponseEntity<List<Orcamento>> GetAll() {
 		List<Orcamento> orcamentos = Orcamento.GetAll();
@@ -77,7 +78,7 @@ public class OrcamentoControl {
 	
 	
 	
-	@ApiOperation(value = "Consulta de orcamento por ID.")
+	@ApiOperation(value = "Consulta de orçamento por ID.",tags={ "Orçamento", })
 	@RequestMapping(method = RequestMethod.GET, value ="/{id}")
     public ResponseEntity<Orcamento> ById(@PathVariable("id") int cod) {
 		Orcamento orc = Orcamento.ById(cod);
@@ -108,7 +109,7 @@ public class OrcamentoControl {
 	
 	
 	
-	@ApiOperation(value = "Inclui nova solicitacao de orcamento")
+	@ApiOperation(value = "Inclui nova solicitação de orçamento",tags={ "Orçamento", })
 	@RequestMapping(method = RequestMethod.POST, value ="/solicitaorcamento")
     public ResponseEntity<Orcamento> SolicitaOrcamento(@RequestBody SolicitacaoOrcamento sO)  {
 		int codItem = 1;
@@ -148,7 +149,7 @@ public class OrcamentoControl {
 	/********************************************************/
 	/********************************************************/
 	
-	@ApiOperation(value = "Aprova orcamento enviado ao Lojista")
+	@ApiOperation(value = "Aprova orçamento enviado ao Lojista",tags={ "Orçamento", })
 	@RequestMapping(method = RequestMethod.PUT, value ="/{id}/efetuarpedido")
     public ResponseEntity<Solicitacao> AprovaOrcamento(@PathVariable("id") int cod) {
 		Orcamento o = Orcamento.ById(cod);
@@ -178,11 +179,11 @@ public class OrcamentoControl {
 	 * @throws JSONException ******************************************************/
 	
 	
-	@ApiOperation(value = "Reprova orcamento enviado ao Lojista")
+	@ApiOperation(value = "Reprova orçamento enviado ao Lojista",tags={ "Orçamento", })
 	@RequestMapping(method = RequestMethod.DELETE, value ="/{id}/reprovar")
     public ResponseEntity<String> ReprovaOrcamento(@PathVariable("id") int cod) {
 		Orcamento.Cancela(cod);
-        return new ResponseEntity<String>("O Orcamento foi reprovado e o pedido cancelado.", HttpStatus.OK);
+        return new ResponseEntity<String>("O Orçaamento foi reprovado e o pedido cancelado.", HttpStatus.OK);
     }
 	
 	

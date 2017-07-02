@@ -18,7 +18,7 @@ import com.model.Produto;
 public class ProdutoControl {
 	
 
-	@ApiOperation(value = "Consulta de produto por ID.")
+	@ApiOperation(value = "Consulta de produto por ID.", hidden=true)
 	@RequestMapping(method = RequestMethod.GET, value ="/{id}")
     public ResponseEntity<Produto> GetProduto(@PathVariable("id") int cod) {
 

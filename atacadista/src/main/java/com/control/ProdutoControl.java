@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiOperation;
 public class ProdutoControl {
 		
 
-	@ApiOperation(value = "Consulta todos os produtos.")
+	@ApiOperation(value = "Consulta todos os produtos.", hidden=true)
 	@RequestMapping(method = RequestMethod.GET, value ="/getall")
     public ResponseEntity<List<Produto>> ById() {
 		List<Produto> ps = Produto.GetProdutos();
@@ -36,7 +36,7 @@ public class ProdutoControl {
         return new ResponseEntity<List<Produto>>(ps, HttpStatus.OK);
     }
 	
-	@ApiOperation(value = "Consulta de produto por ID.")
+	@ApiOperation(value = "Consulta de produto por ID.", hidden=true)
 	@RequestMapping(method = RequestMethod.GET, value ="/{id}")
     public ResponseEntity<Produto> ById(@PathVariable("id") int cod) {
 		Produto p = Produto.ById(cod);

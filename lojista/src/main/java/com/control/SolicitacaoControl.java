@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiOperation;
 public class SolicitacaoControl {
 	
 	
-	@ApiOperation(value = "Comunica orçamento gerado pelo Atacadista.",tags={ "Notificação", })
+	@ApiOperation(value = "Comunica orcamento gerado pelo Atacadista.",tags={ "Notificacao", })
 	@RequestMapping(method = RequestMethod.POST, value ="/comunicarorcamento")
     public ResponseEntity<String> ComunicarOrcamento(@RequestBody Orcamento sO) {
 		
@@ -27,7 +27,7 @@ public class SolicitacaoControl {
     }
 	
 	
-	@ApiOperation(value = "Comunica a alteração de status de uma solicitaçao.",tags={ "Notificação", })
+	@ApiOperation(value = "Comunica a alteracao de status de uma solicitacao.",tags={ "Notificacao", })
 	@RequestMapping(method = RequestMethod.POST, value ="/solicitacao/alteracaostatus")
     public ResponseEntity<String> ComunicaAlteracaoStatus(@RequestBody Solicitacao so) {
 		

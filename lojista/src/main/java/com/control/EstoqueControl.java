@@ -4,7 +4,7 @@ package com.control;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,7 +31,8 @@ public class EstoqueControl {
 	@ApiOperation(value = "Consulta de produtos no estoque.",tags={ "Estoque", })
 	@RequestMapping(method = RequestMethod.GET, value ="/getItens")
     public ResponseEntity<List<ItemEstoque>> GetItens() {
-		List<ItemEstoque> itens = Estoque.GetEstoque().getItens();
+		List<ItemEstoque> itens = new ArrayList<ItemEstoque>();
+		itens = Estoque.GetItens();
 		for(ItemEstoque i : itens) {
 			if(!i.getProd().hasLinks()){
 				i.getProd().add(linkTo(methodOn(ProdutoControl.class).GetProduto(i.getProd().getCod())).withSelfRel());

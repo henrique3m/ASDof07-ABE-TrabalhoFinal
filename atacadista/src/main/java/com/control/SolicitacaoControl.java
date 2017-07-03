@@ -34,7 +34,7 @@ public class SolicitacaoControl {
 	/*******************************************/
 	
 	
-	@ApiOperation(value = "Consulta de todas as solicitações.",tags={ "Solicitação", })
+	@ApiOperation(value = "Consulta de todas as solicitacoes.",tags={ "Solicitacao", })
 	@RequestMapping(method = RequestMethod.GET, value ="/getall")
     public ResponseEntity<List<Solicitacao>> GetAll() {
 		List<Solicitacao> solicitacoes = Solicitacao.GetSolicitacoes();
@@ -67,7 +67,7 @@ public class SolicitacaoControl {
 	
 	
 	
-	@ApiOperation(value = "Consulta solicitação por ID.",tags={ "Solicitação", })
+	@ApiOperation(value = "Consulta solicitacao por ID.",tags={ "Solicitacao", })
 	@RequestMapping(method = RequestMethod.GET, value ="/{id}")
     public ResponseEntity<Solicitacao> ById(@PathVariable("id") int cod) {
 		Solicitacao sol = null;
@@ -93,7 +93,7 @@ public class SolicitacaoControl {
 
 	
 	
-	@ApiOperation(value = "Cancela Solicitação do Lojista",tags={ "Solicitação", })
+	@ApiOperation(value = "Cancela Solicitacao do Lojista",tags={ "Solicitacao", })
 	@RequestMapping(method = RequestMethod.DELETE, value ="/{id}/cancelar")
     public ResponseEntity<String> Cancela(@PathVariable("id") int cod) {
 		Solicitacao.Cancela(cod);

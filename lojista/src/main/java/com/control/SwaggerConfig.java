@@ -30,7 +30,7 @@ public class SwaggerConfig {
     private ApiInfo metaData() {
         ApiInfo apiInfo = new ApiInfo(
                 "Trabalho Final - Microsservice Lojista",
-                "Arquitetura de Backend e Microsserviços - Arquitetura de Software Distribuído – Oferta 7",
+                "Arquitetura de Backend e Microsservicos - Arquitetura de Software Distribuido - Oferta 7",
                 "1.0",
                 "Terms of service",
                 new Contact("Henrique Nascimento, Pedro Horita", "	", ""),

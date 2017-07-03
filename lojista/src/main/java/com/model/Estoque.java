@@ -52,8 +52,8 @@ public class Estoque extends ResourceSupport {
 	}
 	
 	
-	public static Estoque GetEstoque(){
-		Estoque estoque = new Estoque(1);
+	public static List<ItemEstoque> GetItens(){
+		List<ItemEstoque> itens = new ArrayList<ItemEstoque>();
 		JSONObject jsonObject;
 		
 		try {
@@ -69,6 +69,7 @@ public class Estoque extends ResourceSupport {
 		        stringBuffer.append((char)x);
 		    }
 		    json = stringBuffer.toString();
+		    stringBuffer = null;
 
 			jsonObject = new JSONObject(json);
 			JSONObject est = jsonObject.getJSONObject("estoque");
@@ -82,7 +83,7 @@ public class Estoque extends ResourceSupport {
 				ItemEstoque item =  new ItemEstoque(
 						new Produto(pro.getInt("cod"), pro.getString("desc"), pro.getDouble("preco")), 
 						it.getInt("qtd"));
-				estoque.addItem(item);
+				itens.add(item);
 				
 			}
 		} 
@@ -95,7 +96,7 @@ public class Estoque extends ResourceSupport {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return estoque;
+		return itens;
 	}
 	
 

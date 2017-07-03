@@ -71,7 +71,7 @@ public class ExecutaFluxo {
 				
 			}
 			if(!change) {
-				return resp += "\nLojista não possui estoque em baixa.";
+				return resp += "\nLojista nao possui estoque em baixa.";
 			}
 			sItens += ",";
 			sItens = sItens.replace(",,","");
@@ -118,7 +118,7 @@ public class ExecutaFluxo {
 			resp += "\n";
 			resp += "\n";
 			resp += "\n";
-			resp += "\nAtacadista envia número, data do orcamento e URI para consulta.";
+			resp += "\nAtacadista envia numero, data do orcamento e URI para consulta.";
 			resp += "\nAPI Utilizada: " + callback;
 			JSONObject jOrc = new JSONObject(json);
 			String comOrc = "{\"cod\": " + jOrc.getInt("codorcamento") + 

@@ -10,6 +10,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 
@@ -245,13 +248,54 @@ public class ExecutaFluxo {
 			resp += "\nJSON retornado pelo Atacadista apos o Orcamento ser aprovado:";
 			resp += "\n" + json;
 			
-			
-			resp += "\n";
-			resp += "\n";
-			resp += "\n";
-			resp += "\n";
-			resp += "\nStatus do ";
-			
+			JSONObject jSol = new JSONObject(json);
+			int codsol = jSol.getInt("cod");
+			List<String> status = new ArrayList<String>(
+				Arrays.asList("Em fabricacao", "Despachado", "Finalizado")
+			);
+			for(String s : status){
+				resp += "\n";
+				resp += "\n";
+				resp += "\n";
+				resp += "\n";
+				resp += "\nAtacadista altera o status da Solicitacao para " + s + ":";
+				
+				
+				String api = "http://localhost:8091/solicitacao/" + codsol + "/alterastatus/" + s;
+				
+				
+				resp += "\nAPI Utilizada:";
+				resp += api;
+				
+				
+				api = api.replace(" ", "%20");
+				url = new URL(api);
+				conn = null;
+				conn = (HttpURLConnection) url.openConnection();
+				conn.setDoOutput(true);
+				conn.setRequestMethod("PUT");
+				conn.setRequestProperty("Content-Type", "application/json");
+
+				if (conn.getResponseCode() != HTTP_COD_SUCESSO) {
+					throw new RuntimeException("Failed : HTTP error code : "
+						+ conn.getResponseCode());
+				}
+
+				 br = new BufferedReader(new InputStreamReader(
+						(conn.getInputStream())));
+
+				System.out.println("Output from Server .... \n");
+				json = "";
+				while ((output = br.readLine()) != null) {
+					json +="\n"+output;
+				}
+				
+				conn.disconnect();
+				
+				resp += "\nRetorno da API do Atacadista:";
+				resp += "\n" + json;
+				
+			}
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -44,6 +44,21 @@ public class Solicitacao extends ResourceSupport {
 		}
 	}
 	
+	public Solicitacao(Solicitacao s){
+		if (s == null) {
+			throw new IllegalArgumentException("Orcamento esta vazio.");
+		}
+		else{
+			this.cod = s.getCod();
+			this.codClinte = s.getCodClinte();
+			this.state = s.getState();
+			this.callback = s.getCallback();
+			this.valorTotal = s.getValorTotal();
+			this.itens = s.getItens();
+		}
+		
+	}
+	
 
 	public Solicitacao(Orcamento o){
 		if (o == null) {
@@ -158,7 +173,6 @@ public class Solicitacao extends ResourceSupport {
 				
 				for (int i=0; i < jSols.length(); i++) {
 					JSONObject jSol = jSols.getJSONObject(i);
-					System.out.println(jSol);
 					
 					Solicitacao sol = new Solicitacao(
 							jSol.getInt("cod"), jSol.getInt("codClinte"), jSol.getString("state"), 
@@ -250,5 +264,21 @@ public class Solicitacao extends ResourceSupport {
 			i +=1;
 		}
 		SaveAll(solicitacoes);
+	}
+	
+	public static Solicitacao AlteraStatus(int cod, String newStatus){
+		List<Solicitacao> solicitacoes = GetSolicitacoes();
+		Solicitacao sol=null;
+		for (Solicitacao s : solicitacoes){
+			if (s.getCod() == cod) {
+			
+				sol = new Solicitacao(s);
+
+				s.setState(newStatus);
+				SaveAll(solicitacoes);
+				return sol;
+			}
+		}
+		throw new IllegalArgumentException("Nenhuma solicitacao foi encontrada para o código " + cod);
 	}
 }

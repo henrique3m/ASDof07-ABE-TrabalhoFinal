@@ -32,7 +32,7 @@ public class SolicitacaoControl {
     public ResponseEntity<String> ComunicaAlteracaoStatus(@RequestBody Solicitacao so) {
 		
 		String resp = "A alteracao da solicitacao " + so.getCod() + " do status " + so.getLastStatus() + 
-				"para " + so.getNewStatus() + " foi recebida.";
+				" para " + so.getNewStatus() + " foi recebida.";
 		resp += "\nURL: " + so.getUrl(); 
         return new ResponseEntity<String>(resp, HttpStatus.OK);
     }

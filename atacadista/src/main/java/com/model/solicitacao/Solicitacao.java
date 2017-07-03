@@ -279,6 +279,6 @@ public class Solicitacao extends ResourceSupport {
 				return sol;
 			}
 		}
-		throw new IllegalArgumentException("Nenhuma solicitacao foi encontrada para o código " + cod);
+		throw new IllegalArgumentException("Nenhuma solicitacao foi encontrada para o codigo " + cod);
 	}
 }

@@ -1,0 +1,39 @@
+{
+  "estoque": {
+    "cod": 1,
+    "itensEstoque": [
+      {
+        "produto": {
+          "cod": 1,
+          "preco": 1,
+          "desc": "produto1"
+        },
+        "qtd": 3
+      },
+      {
+        "produto": {
+          "cod": 3,
+          "preco": 10,
+          "desc": "produto3"
+        },
+        "qtd": 5
+      },
+      {
+        "produto": {
+          "cod": 4,
+          "preco": 2,
+          "desc": "produto4"
+        },
+        "qtd": 8
+      },
+      {
+        "produto": {
+          "cod": 2,
+          "preco": 0.5,
+          "desc": "produto2"
+        },
+        "qtd": 0
+      }
+    ]
+  }
+}

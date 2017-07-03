@@ -15,7 +15,7 @@ apply plugin: 'org.springframework.boot'
 
 
 jar {
-    baseName = 'asdof07-abe-final-atacadista'
+    baseName = 'asdof07-abe-final-testeexecucaofluxo'
     version =  '0.1.0'
 }
 
